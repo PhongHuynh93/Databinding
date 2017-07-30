@@ -21,7 +21,10 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         // info - how to set var via java fiile
-        RegistrationModel registrationModel = new RegistrationModel("Phong", "quoc lo 1a", 20, true);
+//        RegistrationModel registrationModel = new RegistrationModel("Phong", "quoc lo 1a", 20, true);
+        RegistrationModel registrationModel = new RegistrationModel();
         activityMainBinding.setRegistration(registrationModel);
+
+        registrationModel.address.set("quoc lo 1a");
     }
 }
