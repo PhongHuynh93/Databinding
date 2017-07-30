@@ -14,17 +14,23 @@ So if your xml name is activity_main then it generate the class with the name Ac
         <import type="android.graphics.drawable.Drawable"/>
         <import type="java.util.List"/>
         <import type="example.test.phong.databinding.model.User"/>
+        <import type="example.test.phong.databinding.EventHandler"/>
 
-        <variable name="registration" type="example.test.phong.databinding.model.RegistrationModel"/>
+        <variable name="registration"
+                  type="example.test.phong.databinding.model.RegistrationModel"/>
         <variable name="user" type="User"/>
         <variable name="image" type="Drawable"/>
-        <variable name="note"  type="String"/>
+        <variable name="note" type="String"/>
         <variable name="userList" type="List&lt;User&gt;"/>
+        <variable name="handler" type="EventHandler"/>
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
     </data>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="example.test.phong.databinding.MainActivity">
+        tools:context="example.test.phong.databinding.activity.MainActivity">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -40,60 +46,12 @@ So if your xml name is activity_main then it generate the class with the name Ac
 
         </android.support.design.widget.AppBarLayout>
 
+        <!--https://stackoverflow.com/questions/32947440/android-data-binding-using-include-tag-->
         <include
             android:id="@+id/included"
             layout="@layout/content_main"
-        app:user="@{user}"
-        app:registration="@{registration}"/>
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tv_name"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@{registration.name}"/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/tv_first_name"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@{user.firstName}"/>-->
-
-            <!--&lt;!&ndash;info Do single modification that is change @{} to @={} that’s it.-->
-<!--What it does is when user types then it set the value back to the model class object so when you want to retrieve the value just call that object.&ndash;&gt;-->
-            <!--<EditText-->
-                <!--android:id="@+id/edt_address"-->
-                <!--android:hint="Input address"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@={registration.address}"/>-->
-
-            <!--&lt;!&ndash;test not modify when edt_address is modified&ndash;&gt;-->
-            <!--<TextView-->
-                <!--android:id="@+id/tv_address"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@{registration.address}"/>-->
-
-            <!--&lt;!&ndash;info Remember the model class is having age data type as Integer and setText on a textview accepts String type. So it’s important to use String.valueOf() in case the data type is not String.&ndash;&gt;-->
-            <!--<TextView-->
-                <!--android:id="@+id/tv_age"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@{String.valueOf(registration.age)}"/>-->
-
-            <!--&lt;!&ndash;info - Well data binding supports lots of expression and ternary operator is one of them.&ndash;&gt;-->
-            <!--<TextView-->
-                <!--android:id="@+id/tv_status"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@{registration.isMinor ? @string/minor : @string/major}"/>-->
-
-        <!--</LinearLayout>-->
+            app:registration="@{registration}"
+            app:user="@{user}"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -101,6 +59,7 @@ So if your xml name is activity_main then it generate the class with the name Ac
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{listener::onClick}"
             app:srcCompat="@android:drawable/ic_dialog_email"/>
 
     </android.support.design.widget.CoordinatorLayout>

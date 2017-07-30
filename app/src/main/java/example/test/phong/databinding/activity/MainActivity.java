@@ -1,9 +1,13 @@
-package example.test.phong.databinding;
+package example.test.phong.databinding.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
 
+import example.test.phong.databinding.EventHandler;
+import example.test.phong.databinding.R;
 import example.test.phong.databinding.databinding.ActivityMainBinding;
 import example.test.phong.databinding.model.RegistrationModel;
 import example.test.phong.databinding.model.User;
@@ -12,7 +16,7 @@ import example.test.phong.databinding.model.User;
 /**
  * https://android.jlelse.eu/data-binding-a-library-to-remember-1a5ab7bfc21d
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EventHandler, View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
         User user = new User("First", "Last");
         activityMainBinding.setUser(user);
+    }
+
+    @Override
+    public void onHandleClick(View view) {
+        Toast.makeText(this, "Click the button", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(this, "Click the button", Toast.LENGTH_SHORT).show();
     }
 }
