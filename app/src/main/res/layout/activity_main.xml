@@ -9,7 +9,17 @@ So if your xml name is activity_main then it generate the class with the name Ac
 
     <!--info auto create method setRegistrationModel-->
     <data>
-        <variable name="registration" type="example.test.phong.databinding.RegistrationModel"/>
+
+        <!--info Another thing thing to remember is, when you are mentioning class name directly in type attribute, you have to add import statement for them. You can see imports for User, List and Drawable class.-->
+        <import type="android.graphics.drawable.Drawable"/>
+        <import type="java.util.List"/>
+        <import type="example.test.phong.databinding.model.User"/>
+
+        <variable name="registration" type="example.test.phong.databinding.model.RegistrationModel"/>
+        <variable name="user" type="User"/>
+        <variable name="image" type="Drawable"/>
+        <variable name="note"  type="String"/>
+        <variable name="userList" type="List&lt;User&gt;"/>
     </data>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -30,50 +40,60 @@ So if your xml name is activity_main then it generate the class with the name Ac
 
         </android.support.design.widget.AppBarLayout>
 
-        <!--<include layout="@layout/content_main"/>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <include
+            android:id="@+id/included"
+            layout="@layout/content_main"
+        app:user="@{user}"
+        app:registration="@{registration}"/>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{registration.name}"/>
+            <!--<TextView-->
+                <!--android:id="@+id/tv_name"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@{registration.name}"/>-->
 
-            <!--info Do single modification that is change @{} to @={} that’s it.
-What it does is when user types then it set the value back to the model class object so when you want to retrieve the value just call that object.-->
-            <EditText
-                android:id="@+id/edt_address"
-                android:hint="Input address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@={registration.address}"/>
+            <!--<TextView-->
+                <!--android:id="@+id/tv_first_name"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@{user.firstName}"/>-->
 
-            <!--test not modify when edt_address is modified-->
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{registration.address}"/>
+            <!--&lt;!&ndash;info Do single modification that is change @{} to @={} that’s it.-->
+<!--What it does is when user types then it set the value back to the model class object so when you want to retrieve the value just call that object.&ndash;&gt;-->
+            <!--<EditText-->
+                <!--android:id="@+id/edt_address"-->
+                <!--android:hint="Input address"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@={registration.address}"/>-->
 
-            <!--info Remember the model class is having age data type as Integer and setText on a textview accepts String type. So it’s important to use String.valueOf() in case the data type is not String.-->
-            <TextView
-                android:id="@+id/tv_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{String.valueOf(registration.age)}"/>
+            <!--&lt;!&ndash;test not modify when edt_address is modified&ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:id="@+id/tv_address"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@{registration.address}"/>-->
 
-            <!--info - Well data binding supports lots of expression and ternary operator is one of them.-->
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{registration.isMinor ? @string/minor : @string/major}"/>
+            <!--&lt;!&ndash;info Remember the model class is having age data type as Integer and setText on a textview accepts String type. So it’s important to use String.valueOf() in case the data type is not String.&ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:id="@+id/tv_age"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@{String.valueOf(registration.age)}"/>-->
 
-        </LinearLayout>
+            <!--&lt;!&ndash;info - Well data binding supports lots of expression and ternary operator is one of them.&ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:id="@+id/tv_status"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@{registration.isMinor ? @string/minor : @string/major}"/>-->
+
+        <!--</LinearLayout>-->
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"

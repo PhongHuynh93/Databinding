@@ -1,4 +1,4 @@
-package example.test.phong.databinding;
+package example.test.phong.databinding.model;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import example.test.phong.databinding.databinding.ActivityMainBinding;
+import example.test.phong.databinding.model.RegistrationModel;
+import example.test.phong.databinding.model.User;
 
 
 /**
@@ -19,12 +21,19 @@ public class MainActivity extends AppCompatActivity {
         // info - How to avoid findViewById():
 //        Inside your onCreate method initialize the data binding object by using DataBindingUtil than use that object to access all your views directly.
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
+//        info binding in fragment
+//        MyLayoutBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.my_layout, viewGroup, false);
         // info - how to set var via java fiile
 //        RegistrationModel registrationModel = new RegistrationModel("Phong", "quoc lo 1a", 20, true);
         RegistrationModel registrationModel = new RegistrationModel();
         activityMainBinding.setRegistration(registrationModel);
 
         registrationModel.address.set("quoc lo 1a");
+
+        // can set text by findviewbyid or set var
+        activityMainBinding.included.tvName.setText("Phong");
+
+        User user = new User("First", "Last");
+        activityMainBinding.setUser(user);
     }
 }
